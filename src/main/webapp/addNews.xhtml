@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Dodaj News</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+            <h:form>
+
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Tytul wpisu" style="font-size: 30px"/>
+                    <p:inputText value="#{news.news.tytul}"/>
+                </h:panelGrid>
+
+                <p:editor value="#{news.news.tresc}"/>
+
+                <div style="width: max-content">
+                    <h:commandButton style="width: 50%;height: 100px; float: left" value="Dodaj" action="#{news.addNews()}" />
+                    <h:commandButton style="width: 50%;height: 100px; float: left" value="Anuluj" action="aktualnosci"/>
+                </div>
+
+
+
+            </h:form>
+
+
+
+
+        </h:body>
+
+    </f:view>
+</html>

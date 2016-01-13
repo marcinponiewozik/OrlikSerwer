@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./szablon.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="content">
+        
+        <h:head>
+            <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"></link>
+            <link rel="stylesheet" type="text/css" media="screen"
+                  href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css"></link>
+        </h:head>
+        <h:form>
+            
+            <div class="col-md-12">
+                <div id="datetimepicker" class="input-append date col-md-8 col-md-offset-4">
+                    <h:inputText style="width: 50%;height: 50px" class="add-on" value="#{graBean.dataString}"/>
+                    <br/>
+                    <h:commandButton style="width: 50%;height: 50px" class="btn btn-success btn-lg" value="Pokaz" action="#{graBean.pokazInformacjeZDnia()}"/>
+
+                </div>
+
+                <hr/>
+                <br/>
+                <div class="col-md-6" style="float: left">
+                    <h2>#{graBean.pokazDate()}</h2>
+                    <h4>Liczba chętnych: #{graBean.gra.listaChetnych.size()}</h4>
+                    <h:commandButton style="width: 100%" class="btn btn-primary btn-lg" value="Zapisz mnie" action="#{graBean.zapiszWypisz()}" rendered="#{!graBean.chetny}"/>
+                    <h:commandButton style="width: 100%" class="btn btn-danger btn-lg" value="Wypisz mnie" action="#{graBean.zapiszWypisz()}" rendered="#{graBean.chetny}"/>
+                    <div class="panel panel-info">
+                        <h1 class="panel-heading panel-title">Lista chętnych</h1>
+                        <div class="panel-body">
+                            <ui:repeat value="#{graBean.gra.listaChetnych}" var="g">
+                                <p>#{g.login}</p>
+                            </ui:repeat>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="float: left">
+                    <div class="panel panel-warning">
+                        <h1 class="panel-heading panel-title">Chat </h1>
+                        <div class="panel-body">
+                            <div style="width: 100%;height: 30px">
+                                <h:form>
+                                    <h:inputText value="#{graBean.komentarz}" class="input-append" style="width: 70%;height: 100% ;float: left" />
+                                    <h:commandButton action="#{graBean.dodajKomentarz()}" class="btn btn-danger btn-lg" value="Skomentuj" style="width: 30%;height: 100% ;float: left"/> 
+                                </h:form>
+
+                            </div >
+                            <br/>
+                            <hr/>
+                            <div style="width: 100%">
+                                <ui:repeat value="#{graBean.komentarze}" var="k">
+                                    <p>
+                                        <h:outputText style="color: #c7254e" value="#{k.data}"/>
+                                        <h:outputText style="color: #66afe9" value="|"/>
+                                        <h:outputText  value="#{k.uzytkownik.login}"/>
+                                        <h:outputText style="color: #66afe9" value=":"/>
+                                        #{k.komentarz}
+                                    </p>
+                                </ui:repeat>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </h:form>
+        <script type="text/javascript"
+                src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+        </script> 
+        <script type="text/javascript"
+                src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+        </script>
+        <script type="text/javascript"
+                src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+        </script>
+        <script type="text/javascript"
+                src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+        </script>
+        <script src="resources/js/bootstrap-datepicker.pl.js" type="text/javascript"></script>
+        <script type="text/javascript">
+                    $.fn.datetimepicker.dates['pl'] = {
+                        days: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"],
+                        daysShort: ["Nie", "Pn", "Wt", "Śr", "Czw", "Pt", "So", "Nie"],
+                        daysMin: ["N", "Pn", "Wt", "Śr", "Cz", "Pt", "So", "N"],
+                        months: ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"],
+                        monthsShort: ["Sty", "Lu", "Mar", "Kw", "Maj", "Cze", "Lip", "Sie", "Wrz", "Pa", "Lis", "Gru"],
+                        today: "Dzisiaj",
+                        weekStart: 0
+                    };
+                    $('#datetimepicker').datetimepicker({
+                        format: 'dd/MM/yyyy',
+                        language: 'pl',
+                        pickTime: false,
+                        default: true
+                    });
+        </script>
+
+    </ui:define>
+
+</ui:composition>

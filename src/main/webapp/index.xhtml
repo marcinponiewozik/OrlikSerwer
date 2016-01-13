@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./szablon.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content" class="row">
+        <div class="col-lg-8 center-block">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                </ol>
+
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="zdjecia/jpg1.jpg" alt="" width="800"  height="600" />
+                        <div class="carousel-caption">
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="zdjecia/jpg2.jpg" alt="" width="800" height="600"/>
+                        <div class="carousel-caption">
+
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="zdjecia/jpg3.jpg" alt="" width="800" height="600"/>
+                        <div class="carousel-caption">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-4" >
+            <h1 class="">Orlik gminy Wysokie</h1>
+            <h3>ul. Kościelna 15</h3>
+            <hr/>
+            <div class="panel panel-primary">
+                <h2 class="panel-heading panel-title">Godziny otwarcia</h2>
+                <ul>
+                    <li><h4>Poniedziałek - Piątek : 15- 21</h4></li>
+                    <li><h4>Sobota : 16- 19</h4></li>
+                    <li><h4>Niedziela : 14- 18</h4></li>
+                </ul>
+            </div>
+
+            <hr/>
+            <br/>
+            <div class="panel panel-success">
+                <h2 class="panel-heading panel-title">Kontakt</h2>
+                <ul>
+                    <li><h4>Jan Kowalski: 111 222 333</h4></li>
+                    <li><h4>Paweł Nowak: 333 444 555</h4></li>
+                </ul>
+            </div>
+            <hr/>
+            <br/>
+            <div class="panel panel-info">
+                <h2 class="panel-heading panel-title">Email</h2>
+                <h4>orlik.wysokie@gmail.com</h4>
+            </div>
+
+        </div>
+
+        <hr/>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./szablon.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <div class="col-lg-12" style="margin-bottom: 10px" >
+            <h:form>
+                <h:commandButton class="btn btn-success btn-lg col-lg-12" value="Dodaj" action="addNews" rendered = "#{logowanie.uzytkownik.administrator}"/>
+            </h:form>
+        </div>
+        <div class="jumbotron active col-lg-12" style="background: #777">
+            <h1>#{news.newsGlowny.tytul}</h1>
+            <p>
+                #{news.newsGlowny.autor.login}|
+                <h:outputText value="#{news.newsGlowny.data}">
+                </h:outputText>
+            </p>
+            <p>
+                <h:link rendered="#{news.newsGlowny!=null}" outcome="aktualnosciDetails" value="Przeczytaj" class="btn btn-primary btn-lg" role="button">
+                    <f:param id="newsID" name="newsID" value="#{news.newsGlowny.id}" />
+                </h:link>
+            </p>
+        </div>
+        <ui:repeat value="#{news.newsList}" var="n">
+            <div class="jumbotron active col-lg-6"  style="float: left;height: 400px; background: #777">
+                <h1 >#{n.tytul}</h1>
+                <p>
+                    #{n.autor.login}|
+                    <h:outputText value="#{n.data}">
+                    </h:outputText>
+                </p>
+                <p>
+                    <h:link outcome="aktualnosciDetails" value="Przeczytaj" class="btn btn-primary btn-lg" role="button">
+                        <f:param id="newsID" name="newsID" value="#{n.id}" />
+                    </h:link>
+                </p>
+            </div>
+
+        </ui:repeat>
+    </ui:define>
+
+</ui:composition>

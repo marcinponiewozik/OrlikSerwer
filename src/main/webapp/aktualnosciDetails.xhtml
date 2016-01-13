@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./szablon.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form>
+            <div class="col-md-12" >
+                <div class="col-md-8 col-md-offset-2" >
+
+                    <h1 style="font-size: 64px">#{newsEdit.newsDetails.tytul}</h1>
+
+                    <h:outputText value="Autor:#{newsEdit.newsDetails.autor.login}" style="float: left"/>
+
+                    <h:outputText value="#{newsEdit.newsDetails.data}" style="float: right">
+                    </h:outputText>
+                    <h:outputText value="Data publikacji:" style="float: right"/>
+
+                    <br/>
+                    <hr/>
+                    <h3>
+                        <h:outputText value="#{newsEdit.newsDetails.tresc}" escape="false"/>
+                    </h3>
+                    <h:commandButton class="btn btn-danger btn-lg" value="Usun" rendered="#{logowanie.uzytkownik.administrator}" action="#{newsEdit.usunNews()}" style="float: right"/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                </div>
+                <div class="col-md-8 col-md-offset-2" >
+
+                    <span class="label label-warning col-md-12" style="font-size: 34px" >Dodaj Komentarz</span>
+                    <br/>
+
+                    <h:form rendered="#{logowanie.zalogowany}">
+                        <h:inputTextarea class="col-md-12" value="#{newsEdit.trescKomentarza}"/>
+                        <h:commandButton rendered="#{!newsEdit.edytowany}" class="btn btn-success" value="Skomentuj" action="#{newsEdit.dodajKomentarz()}"/>
+                        <h:form rendered="#{newsEdit.edytowany}">
+                            <h:commandButton value="Edytuj" class="btn btn-success" action="#{newsEdit.zatwierdzKomentarz()}"/>
+                            <h:commandButton value="Anuluj" class ="btn btn-danger" action="#{newsEdit.anulujZmiany()}"/>
+                        </h:form>
+
+                    </h:form>
+
+                    <div>
+                        <ui:repeat value="#{newsEdit.komentarze}" var="k">
+                            <div class="col-md-12 " style="border: #000000 solid; margin-bottom: 5px;">
+                                <h:outputText value="dodany przez:#{k.uzytkownik.login}" style="float: left"/>
+                                <h:outputText value=">>" style="float: left"/>
+                                <h:outputText style="float: left" value="#{k.data}">
+                                </h:outputText>
+                                <br/>
+                                <hr style="border-color: red"/>
+                                <h5>#{k.komentarz}</h5>
+                                <br/>
+                                <h:commandButton rendered="#{k.uzytkownik.id==logowanie.uzytkownik.id}" value="Usun" action="#{newsEdit.usunKomentarz(k.id)}" class="btn btn-danger" style="float: right"/>
+                                <h:commandButton rendered="#{k.uzytkownik.id==logowanie.uzytkownik.id}" value="Edytuj" action="#{newsEdit.edytujKomentarz(k.id)}" class="btn btn-primary" style="float: right"/>
+                            </div>
+
+                        </ui:repeat>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

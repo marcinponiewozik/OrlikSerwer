@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./szablon.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="3" >
+                <h:outputText value="Nazwa uzytkownika" />
+                <h:inputText id="login" value="#{rejestracja.uzytkownik.login}" required="true" requiredMessage="To pole musi być wypełnione" >
+                    <f:validator validatorId="loginValidator"/>                    
+                </h:inputText>
+                <h:message for="login" style="color:red" />
+
+                <h:outputText value="Haslo" />
+                <h:inputSecret id="haslo" value="#{rejestracja.uzytkownik.password}" required="true" requiredMessage="To pole musi być wypełnione">
+                    <f:validator validatorId="passwordValidator"/>
+                    <f:attribute name="haslo2" value="#{haslo2}"/>
+                </h:inputSecret>
+                <h:message for="haslo" style="color:red" />
+
+                <h:outputText  value="Powtórz" />
+                <h:inputSecret id="haslo2" required="true" binding="#{haslo2}" requiredMessage="To pole musi być wypełnione"/>
+                <h:message for="haslo2" style="color:red" />
+
+                <h:outputText  value="Email" />
+                <h:inputText id="email" value="#{rejestracja.uzytkownik.email}" required="true" requiredMessage="To pole musi być wypełnione">
+                    <f:validator validatorId="emailValidator"/>
+                </h:inputText>
+                <h:message for="email" style="color:red" />
+
+            </h:panelGrid>
+
+            <h:commandButton class="btn btn-primary btn-lg" value="Dodaj" action="#{rejestracja.dodaj()}"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
