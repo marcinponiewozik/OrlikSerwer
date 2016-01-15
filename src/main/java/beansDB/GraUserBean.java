@@ -62,8 +62,10 @@ public class GraUserBean {
         graUsers = q.getResultList();
         List<Uzytkownik> lista = new ArrayList<Uzytkownik>();
         Uzytkownik u;
-        for (GraUser graUser : graUsers) {
-            lista.add(graUser.getUzytkownik());
+        if (graUsers.size() > 0) {
+            for (GraUser graUser : graUsers) {
+                lista.add(graUser.getUzytkownik());
+            }
         }
         return lista;
 
@@ -86,6 +88,6 @@ public class GraUserBean {
         q.setParameter("idGra", idGra);
         q.setParameter("idUser", id);
         List<Uzytkownik> lista = q.getResultList();
-        return lista.size()>0;
+        return lista.size() > 0;
     }
 }
