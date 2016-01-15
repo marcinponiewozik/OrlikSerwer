@@ -128,8 +128,11 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     public Response listaChetnych() {
         Gra gra = new Gra();
         gra =graBean.wezGraByData(new Date());
-        
-        return Response.ok(graUserBean.wszystkieDecyzje(gra, 0)).build();
+        List<Uzytkownik> list = graUserBean.wszystkieDecyzje(gra, 0);
+        if(list.size()>0)
+            return Response.ok(graUserBean.wszystkieDecyzje(gra, 0)).build();
+        else
+            return Response.ok().build();
     }
     @GET
     @Path("/listaniezdecydowanych")
