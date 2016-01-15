@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
  * @author Marcin
  */
 @Stateless
-@Path("gra")
+@Path("zagraj")
 public class GraFacadeREST extends AbstractFacade<Gra> {
 
     @PersistenceContext(unitName = "WebApplication1PU")
