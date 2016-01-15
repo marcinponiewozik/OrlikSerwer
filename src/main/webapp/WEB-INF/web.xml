@@ -26,7 +26,7 @@
         <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
 
-    <filter>
+<!--    <filter>
         <filter-name>ConnectionFilter</filter-name>
         <filter-class>com.filter.ConnectionFilter</filter-class>
     </filter>
@@ -34,7 +34,7 @@
         <filter-name>ConnectionFilter</filter-name>
         <url-pattern>/faces/*</url-pattern>
         <url-pattern>/webresources/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
          
 </web-app>
 

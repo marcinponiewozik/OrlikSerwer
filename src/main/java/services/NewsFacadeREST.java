@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,7 +27,7 @@ import javax.ws.rs.Produces;
 @Stateless
 @Path("news")
 public class NewsFacadeREST extends AbstractFacade<News> {
-    @PersistenceContext(unitName = "WebApplication1PU")
+    @PersistenceContext(type = PersistenceContextType.EXTENDED,unitName = "WebApplication1PU")
     private EntityManager em;
 
     public NewsFacadeREST() {

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 /**
@@ -19,7 +20,8 @@ import javax.persistence.Query;
  */
 @Stateless
 public class WiadomosciBean {
-@PersistenceContext
+
+    @PersistenceContext(type = PersistenceContextType.EXTENDED)
     private EntityManager manager;
 
     public void dodaj(Wiadomosc w) {
@@ -42,12 +44,12 @@ public class WiadomosciBean {
             usun(wiadomosci.get(i).getId());
         }
     }
-    
-    public List<Wiadomosc> getWiadomosci(Long odbiorca){
+
+    public List<Wiadomosc> getWiadomosci(Long odbiorca) {
         Query q = manager.createQuery("SELECT w FROM Wiadomosc w WHERE w.odbiorca.id =:id ", Wiadomosc.class);
         q.setParameter("id", odbiorca);
         List<Wiadomosc> wiadomosci = new ArrayList<Wiadomosc>();
-    
+
         wiadomosci = q.getResultList();
         return wiadomosci;
     }
