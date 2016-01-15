@@ -125,11 +125,11 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     @GET
     @Path("/listachetnych")
     @Produces({"application/json"})
-    public List<Uzytkownik> listaChetnych() {
+    public Response listaChetnych() {
         Gra gra = new Gra();
         gra =graBean.wezGraByData(new Date());
         
-        return graUserBean.wszystkieDecyzje(gra, 0);
+        return Response.ok(graUserBean.wszystkieDecyzje(gra, 0)).build();
     }
     @GET
     @Path("/listaniezdecydowanych")
