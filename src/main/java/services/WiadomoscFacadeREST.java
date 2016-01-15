@@ -9,13 +9,11 @@ import beansDB.UzytkownikBean;
 import beansDB.WiadomosciBean;
 import entitys.Uzytkownik;
 import entitys.Wiadomosc;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,7 +32,7 @@ import javax.ws.rs.core.Response;
 @Path("wiadomosc")
 public class WiadomoscFacadeREST extends AbstractFacade<Wiadomosc> {
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED,unitName = "WebApplication1PU")
+    @PersistenceContext(unitName = "WebApplication1PU")
     private EntityManager em;
 
     @EJB

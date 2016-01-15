@@ -13,7 +13,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -33,7 +32,7 @@ import javax.ws.rs.core.Response;
 @Path("uzytkownik")
 public class UzytkownikFacadeREST extends AbstractFacade<Uzytkownik> {
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED,unitName = "WebApplication1PU")
+    @PersistenceContext(unitName = "WebApplication1PU")
     private EntityManager em;
 
     @EJB

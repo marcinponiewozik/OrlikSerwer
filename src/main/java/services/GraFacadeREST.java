@@ -15,7 +15,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,7 +33,7 @@ import javax.ws.rs.core.Response;
 @Path("entitys.gra")
 public class GraFacadeREST extends AbstractFacade<Gra> {
     
-    @PersistenceContext(unitName = "WebApplication1PU", type = PersistenceContextType.EXTENDED)
+    @PersistenceContext(unitName = "WebApplication1PU")
     private EntityManager em;
 
     @EJB
