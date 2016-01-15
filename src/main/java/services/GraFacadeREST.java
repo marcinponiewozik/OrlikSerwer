@@ -62,7 +62,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     }
 
     @PUT
-    @Path("/zapiszUzytkownika/{wybor}")
+    @Path("/zapiszuzytkownika/{wybor}")
     @Consumes({"application/json"})
     public Response zapiszUzytkownika(@PathParam("wybor") Integer wybor, Uzytkownik user) {
         System.out.println("OK");
@@ -88,7 +88,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     }
 
     @DELETE
-    @Path("wypiszUzytkownika/{id}/{wybor}")
+    @Path("wypiszuzytkownika/{id}/{wybor}")
     public Response wypiszUzytkownika(@PathParam("id") Long id,@PathParam("wybor") Integer wybor) {
         Long idGra = graBean.wezGraByData(new Date()).getId();
         if (wybor == 0) {
@@ -110,7 +110,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
 
     
     @GET
-    @Path("/getGra")
+    @Path("/getgra")
     @Produces({"application/json"})
     public Response getGra() {
         Gra gra= new Gra();
@@ -137,7 +137,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         return super.findRange(new int[]{from, to});
     }
     @GET
-    @Path("/listaChetnych")
+    @Path("/listachetnych")
     @Produces({"application/json"})
     public List<Uzytkownik> listaChetnych() {
         Gra gra = new Gra();
@@ -146,7 +146,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         return gra.getListaChetnych();
     }
     @GET
-    @Path("/listaNiezdecydowanych")
+    @Path("/listaniezdecydowanych")
     @Produces({"application/json"})
     public List<Uzytkownik> listaNiezdecydowanych() {
         Gra gra = new Gra();
@@ -155,7 +155,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         return gra.getListaMoze();
     }
     @GET
-    @Path("/listaNieobecni")
+    @Path("/listanieobecni")
     @Produces({"application/json"})
     public List<Uzytkownik> listaNieobecni() {
         Gra gra = new Gra();
