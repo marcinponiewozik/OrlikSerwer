@@ -25,16 +25,6 @@
         <servlet-name>javax.ws.rs.core.Application</servlet-name>
         <url-pattern>/webresources/*</url-pattern>
     </servlet-mapping>
-
-<!--    <filter>
-        <filter-name>ConnectionFilter</filter-name>
-        <filter-class>com.filter.ConnectionFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>ConnectionFilter</filter-name>
-        <url-pattern>/faces/*</url-pattern>
-        <url-pattern>/webresources/*</url-pattern>
-    </filter-mapping>-->
          
 </web-app>
 
