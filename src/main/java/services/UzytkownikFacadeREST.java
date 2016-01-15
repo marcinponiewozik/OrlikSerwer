@@ -97,7 +97,7 @@ public class UzytkownikFacadeREST extends AbstractFacade<Uzytkownik> {
 
             user = uzytkownikBean.getUser(login);
             if (user.getPassword().equals(pass)) {
-                uzytkownikBean.updateLastLoginDate(login);
+//                uzytkownikBean.updateLastLoginDate(login);
                 return Response.ok(user, MediaType.APPLICATION_JSON).build();
             } else {
                 return Response.status(Response.Status.NOT_FOUND).build();
