@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
 @Stateless
 @Path("entitys.gra")
 public class GraFacadeREST extends AbstractFacade<Gra> {
-    
+
     @PersistenceContext(unitName = "WebApplication1PU")
     private EntityManager em;
 
@@ -69,7 +69,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     @Consumes({"application/json"})
     public Response zapiszUzytkownika(@PathParam("decyzja") Integer decyzja, Uzytkownik user) {
         Gra gra = new Gra();
-        gra =graBean.wezGraByData(new Date());
+        gra = graBean.wezGraByData(new Date());
         graUserBean.zmienDecyzja(gra, user, decyzja);
         return Response.status(Response.Status.OK).build();
     }
@@ -94,13 +94,12 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         return super.find(id);
     }
 
-    
     @GET
     @Path("/getgra")
     @Produces({"application/json"})
     public Response getGra() {
-        Gra gra= new Gra();
-        if(!graBean.sprawdzCzyGraja(new Date())){
+        Gra gra = new Gra();
+        if (!graBean.sprawdzCzyGraja(new Date())) {
             gra.setData(new Date());
             gra.setDodatkoweInformacje("dotatkowe info");
             graBean.add(gra);
@@ -122,34 +121,33 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     public List<Gra> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
+
     @GET
     @Path("/listachetnych")
     @Produces({"application/json"})
-    public Response listaChetnych() {
+    public List<Uzytkownik> listaChetnych() {
         Gra gra = new Gra();
-        gra =graBean.wezGraByData(new Date());
-        List<Uzytkownik> list = graUserBean.wszystkieDecyzje(gra, 0);
-        if(list.size()>0)
-            return Response.ok(graUserBean.wszystkieDecyzje(gra, 0)).build();
-        else
-            return Response.ok().build();
+        gra = graBean.wezGraByData(new Date());
+        return graUserBean.wszystkieDecyzje(gra, 0);
     }
+
     @GET
     @Path("/listaniezdecydowanych")
     @Produces({"application/json"})
     public List<Uzytkownik> listaNiezdecydowanych() {
         Gra gra = new Gra();
-        gra =graBean.wezGraByData(new Date());
-        
+        gra = graBean.wezGraByData(new Date());
+
         return graUserBean.wszystkieDecyzje(gra, 1);
     }
+
     @GET
     @Path("/listanieobecni")
     @Produces({"application/json"})
     public List<Uzytkownik> listaNieobecni() {
         Gra gra = new Gra();
-        gra =graBean.wezGraByData(new Date());
-        
+        gra = graBean.wezGraByData(new Date());
+
         return graUserBean.wszystkieDecyzje(gra, 2);
     }
 
@@ -164,5 +162,5 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
 }

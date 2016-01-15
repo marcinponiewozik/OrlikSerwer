@@ -34,7 +34,7 @@ public class GraBean {
     }
 
     public Gra wezGraByData(Date data) {
-        Query q = manager.createQuery("SELECT g FROM Gra g WHERE g.data =:data", Gra.class);
+        Query q = manager.createQuery("SELECT g FROM Gra g WHERE g.data=:data", Gra.class);
         q.setParameter("data", data);
 
         Gra gra = new Gra();
@@ -43,7 +43,7 @@ public class GraBean {
     }
 
     public boolean sprawdzCzyGraja(Date data) {
-        Query query = manager.createQuery("SELECT g FROM Gra g WHERE g.data =:data", Gra.class);
+        Query query = manager.createQuery("SELECT g FROM Gra g WHERE g.data=:data", Gra.class);
         query.setParameter("data",data);
 
         if (query.getResultList().isEmpty()) {

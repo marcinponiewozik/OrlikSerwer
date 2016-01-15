@@ -54,7 +54,7 @@ public class GraUserBean {
     }
 
     public List<Uzytkownik> wszystkieDecyzje(Gra g, int decyzja) {
-        Query q = manager.createQuery("SELECT g FROM GraUser g  WHERE g.gra.id=:idGra AND g.decyzja =: decyzja", GraUser.class);
+        Query q = manager.createQuery("SELECT g FROM GraUser g  WHERE g.gra.id=:idGra AND g.decyzja =:decyzja", GraUser.class);
         q.setParameter("idGra", g.getId());
         q.setParameter("decyzja", decyzja);
 
