@@ -110,7 +110,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
 
     
     @GET
-    @Path("/gra")
+    @Path("/getGra")
     @Produces({"application/json"})
     public Response getGra() {
         Gra gra= new Gra();
