@@ -13,7 +13,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.Query;
 
 /**
@@ -23,7 +22,7 @@ import javax.persistence.Query;
 @Stateless
 public class UzytkownikBean {
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED)
+    @PersistenceContext
     private EntityManager manager;
 
     public void add(Uzytkownik uzytkownik) {
