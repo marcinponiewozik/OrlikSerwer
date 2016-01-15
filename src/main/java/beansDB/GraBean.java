@@ -5,12 +5,8 @@
  */
 package beansDB;
 
-import beans.RejestracjaController;
 import entitys.Gra;
-import entitys.Uzytkownik;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -38,7 +34,7 @@ public class GraBean {
     }
 
     public Gra wezGraByData(Date data) {
-        Query q = manager.createQuery("SELECT g FROM Gra g JOIN FETCH g.listaChetnych JOIN FETCH g.listaMoze JOIN FETCH g.listaNie WHERE g.data =:data", Gra.class);
+        Query q = manager.createQuery("SELECT g FROM Gra g WHERE g.data =:data", Gra.class);
         q.setParameter("data", data);
 
         Gra gra = new Gra();
