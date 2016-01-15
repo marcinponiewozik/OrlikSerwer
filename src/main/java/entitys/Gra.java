@@ -34,17 +34,18 @@ public class Gra implements Serializable {
     private Long id;
     @Temporal(TemporalType.DATE)
     private Date data;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="Chetni",
             joinColumns = @JoinColumn(name = "Gra_Id"),
             inverseJoinColumns = @JoinColumn(name = "Uzytkownik_Id"))
     private List<Uzytkownik> listaChetnych;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="Niezdecydowani",
             joinColumns = @JoinColumn(name = "Gra_Id"),
             inverseJoinColumns = @JoinColumn(name = "Uzytkownik_Id"))
+    
     private List<Uzytkownik> listaMoze;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="Brak",
             joinColumns = @JoinColumn(name = "Gra_Id"),
             inverseJoinColumns = @JoinColumn(name = "Uzytkownik_Id"))
