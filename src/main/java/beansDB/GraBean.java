@@ -30,52 +30,8 @@ public class GraBean {
         manager.persist(gra);
     }
 
-    public void dodajChetnego(Uzytkownik uzytkownik, Long id) {
-        Gra temp = manager.find(Gra.class, id);
-        List<Uzytkownik> lista = temp.getListaChetnych();
-        lista.add(uzytkownik);
-        temp.setListaChetnych(lista);
-        manager.merge(temp);
-    }
 
-    public void usunChętnego(Uzytkownik uzytkownik, Long id) {
-        Gra temp = manager.find(Gra.class, id);
-        List<Uzytkownik> lista = temp.getListaChetnych();
-        lista.remove(uzytkownik);
-        temp.setListaChetnych(lista);
-        manager.merge(temp);
-    }
 
-    public void zapiszUzytkownika(Uzytkownik uzytkownik, Long id, int wybor) {
-        Gra temp = manager.find(Gra.class, id);
-        List<Uzytkownik> lista;
-        if (wybor == 1) {
-            lista = temp.getListaMoze();
-        } else {
-            lista = temp.getListaNie();
-        }
-
-        lista.add(uzytkownik);
-        temp.setListaChetnych(lista);
-        manager.merge(temp);
-
-    }
-
-    public void usunDecyzje(Uzytkownik uzytkownik, Long id, int wybor) {
-        Gra temp = manager.find(Gra.class, id);
-        List<Uzytkownik> lista;
-        if (wybor == 1) {
-            lista = temp.getListaMoze();
-            lista.remove(uzytkownik);
-            temp.setListaMoze(lista);
-            manager.merge(temp);
-        } else {
-            lista = temp.getListaNie();
-            lista.remove(uzytkownik);
-            temp.setListaNie(lista);
-            manager.merge(temp);
-        }
-    }
 
     public Gra getGra(Long id) {
         return manager.find(Gra.class, id);
@@ -101,15 +57,5 @@ public class GraBean {
         }
     }
 
-    public boolean sprawdzGracza(Long idGra, Long idUser) {
-        Gra temp = manager.find(Gra.class, idGra);
-        List<Uzytkownik> lista = temp.getListaChetnych();
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getId() == idUser) {
-                return true;
-            }
-        }
 
-        return false;
-    }
 }

@@ -34,22 +34,6 @@ public class Gra implements Serializable {
     private Long id;
     @Temporal(TemporalType.DATE)
     private Date data;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="Chetni",
-            joinColumns = @JoinColumn(name = "Gra_Id"),
-            inverseJoinColumns = @JoinColumn(name = "Uzytkownik_Id"))
-    private List<Uzytkownik> listaChetnych;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="Niezdecydowani",
-            joinColumns = @JoinColumn(name = "Gra_Id"),
-            inverseJoinColumns = @JoinColumn(name = "Uzytkownik_Id"))
-    
-    private List<Uzytkownik> listaMoze;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name="Brak",
-            joinColumns = @JoinColumn(name = "Gra_Id"),
-            inverseJoinColumns = @JoinColumn(name = "Uzytkownik_Id"))
-    private List<Uzytkownik> listaNie;
 
     private String dodatkoweInformacje;
 
@@ -69,34 +53,7 @@ public class Gra implements Serializable {
         this.data = data;
     }
     
-    
-
-    
-    @XmlTransient
-    public List<Uzytkownik> getListaChetnych() {
-        return this.listaChetnych;
-    }
-
-    public void setListaChetnych(List<Uzytkownik> listaChetnych) {
-        this.listaChetnych = listaChetnych;
-    }
-    @XmlTransient
-    public List<Uzytkownik> getListaMoze() {
-        return listaMoze;
-    }
-
-    public void setListaMoze(List<Uzytkownik> listaMoze) {
-        this.listaMoze = listaMoze;
-    }
-    @XmlTransient
-    public List<Uzytkownik> getListaNie() {
-        return listaNie;
-    }
-
-    public void setListaNie(List<Uzytkownik> listaNie) {
-        this.listaNie = listaNie;
-    }
-    
+   
     
     
     

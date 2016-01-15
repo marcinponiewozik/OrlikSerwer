@@ -6,6 +6,7 @@
 package services;
 
 import beansDB.GraBean;
+import beansDB.GraUserBean;
 import beansDB.UzytkownikBean;
 import entitys.Gra;
 import entitys.Uzytkownik;
@@ -41,6 +42,8 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
 
     @EJB
     private GraBean graBean;
+    @EJB
+    private GraUserBean graUserBean;
 
     public GraFacadeREST() {
         super(Gra.class);
@@ -62,22 +65,12 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     }
 
     @PUT
-    @Path("/zapiszuzytkownika/{wybor}")
+    @Path("/zapiszdecyzje/{decyzja}")
     @Consumes({"application/json"})
-    public Response zapiszUzytkownika(@PathParam("wybor") Integer wybor, Uzytkownik user) {
-        System.out.println("OK");
-        Gra entity = new Gra();
-        entity = graBean.wezGraByData(new Date());
-        if (wybor == 0) {
-            entity.getListaChetnych().add(user);
-        } else if (wybor == 1) {
-            entity.getListaMoze().add(user);
-        } else {
-            entity.getListaNie().add(user);
-        }
-        System.out.println("OK");
-        super.edit(entity);
-
+    public Response zapiszUzytkownika(@PathParam("decyzja") Integer decyzja, Uzytkownik user) {
+        Gra gra = new Gra();
+        gra =graBean.wezGraByData(new Date());
+        graUserBean.zmienDecyzja(gra, user, decyzja);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -88,16 +81,9 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     }
 
     @DELETE
-    @Path("wypiszuzytkownika/{id}/{wybor}")
-    public Response wypiszUzytkownika(@PathParam("id") Long id,@PathParam("wybor") Integer wybor) {
-        Long idGra = graBean.wezGraByData(new Date()).getId();
-        if (wybor == 0) {
-            graBean.usunChętnego(uzytkownikBean.getUserById(id), idGra);
-        } else if (wybor == 1) {
-            graBean.usunDecyzje(uzytkownikBean.getUserById(id), idGra, wybor);
-        } else {
-            graBean.usunDecyzje(uzytkownikBean.getUserById(id), idGra, wybor);
-        }
+    @Path("wypiszuzytkownika/{id}")
+    public Response wypiszUzytkownika(@PathParam("id") Long id) {
+        graUserBean.wypiszUzytkownika(graBean.wezGraByData(new Date()), id);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -143,7 +129,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         Gra gra = new Gra();
         gra =graBean.wezGraByData(new Date());
         
-        return gra.getListaChetnych();
+        return graUserBean.wszystkieDecyzje(gra, 0);
     }
     @GET
     @Path("/listaniezdecydowanych")
@@ -152,7 +138,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         Gra gra = new Gra();
         gra =graBean.wezGraByData(new Date());
         
-        return gra.getListaMoze();
+        return graUserBean.wszystkieDecyzje(gra, 1);
     }
     @GET
     @Path("/listanieobecni")
@@ -161,7 +147,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         Gra gra = new Gra();
         gra =graBean.wezGraByData(new Date());
         
-        return gra.getListaNie();
+        return graUserBean.wszystkieDecyzje(gra, 2);
     }
 
     @GET

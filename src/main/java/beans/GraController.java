@@ -7,6 +7,7 @@ package beans;
 
 
 import beansDB.GraBean;
+import beansDB.GraUserBean;
 import beansDB.KomenatrzBean;
 import beansDB.UzytkownikBean;
 import entitys.Dzial;
@@ -47,7 +48,8 @@ public class GraController {
     private UzytkownikBean uzytkownikRequest;
     @EJB
     private KomenatrzBean komentarzRequest;
-
+    @EJB
+    private GraUserBean graUserBean;
     public List<Komentarz> getKomentarze() {
         if (gra != null) {
             komentarze = komentarzRequest.getAllByDzial(Dzial.GRA, gra.getId());
@@ -62,7 +64,7 @@ public class GraController {
     public boolean isChetny() {
         Uzytkownik temp = new Uzytkownik();
         temp = uzytkownikRequest.getUserById((Long) Session.getSession().getAttribute("userID"));
-        chetny = request.sprawdzGracza(gra.getId(),temp.getId());
+        chetny = graUserBean.sprawdzGracza(gra.getId(),temp.getId());
         return chetny;
     }
 
@@ -152,16 +154,17 @@ public class GraController {
         Uzytkownik temp = new Uzytkownik();
         temp = uzytkownikRequest.getUserById((Long) Session.getSession().getAttribute("userID"));
         boolean flag = false;
-        for (Uzytkownik u : gra.getListaChetnych()) {
+        List<Uzytkownik> list = graUserBean.wszystkieDecyzje(gra, 0);
+        for (Uzytkownik u : list) {
             if (u.getId() == temp.getId()) {
                 flag = true;
             }
         }
         if (flag) {
-            request.usunChętnego(temp, gra.getId());
+            graUserBean.wypiszUzytkownika(gra, temp.getId());
             chetny = false;
         } else {
-            request.dodajChetnego(temp, gra.getId());
+            graUserBean.zmienDecyzja(gra, temp, 0);
             chetny = true;
         }
     }
