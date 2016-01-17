@@ -60,7 +60,12 @@ public class GraUserFacadeREST extends AbstractFacade<GraUser> {
         Gra gra = new Gra();
         user.setId(id);
         gra = graBean.wezGraByData(new Date());
-        graUserBean.zapiszDecyzje(gra, user, decyzja);
+        GraUser graUser = new GraUser();
+        graUser.setDecyzja(decyzja);
+        graUser.setGra(gra);
+        graUser.setUzytkownik(user);
+        super.create(graUser);
+//        graUserBean.zapiszDecyzje(gra, user, decyzja);
         return Response.status(Response.Status.CREATED).build();
     }
 
