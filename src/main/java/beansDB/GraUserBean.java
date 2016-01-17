@@ -38,18 +38,19 @@ public class GraUserBean {
     }
 
     public void zmienDecyzja(Gra gra, Uzytkownik uzytkownik, int decyzja) {
-        Query q = manager.createQuery("SELECT g FROM GraUser g  WHERE g.uzytkownik.id =:idUser", GraUser.class);
+        Query q = manager.createQuery("SELECT g FROM GraUser g  WHERE g.uzytkownik.id=:idUser AND g.gra.id=:idGra", GraUser.class);
         q.setParameter("idUser", uzytkownik.getId());
+        q.setParameter("idGra", gra.getId());
         GraUser graUser = new GraUser();
-        if (q.getResultList().size() == 0) {
+        if (q.getResultList().isEmpty()) {
             graUser.setDecyzja(decyzja);
             graUser.setGra(gra);
             graUser.setUzytkownik(uzytkownik);
-            dodaj(graUser);
+//            dodaj(graUser);
         } else {
             graUser = (GraUser) q.getResultList().get(0);
             graUser.setDecyzja(decyzja);
-            zamien(graUser);
+//            zamien(graUser);
         }
     }
 
