@@ -46,11 +46,11 @@ public class GraUserBean {
             graUser.setDecyzja(decyzja);
             graUser.setGra(gra);
             graUser.setUzytkownik(uzytkownik);
-            dodaj(graUser);
+            manager.persist(graUser);
         } else {
             graUser = (GraUser) q.getResultList().get(0);
             graUser.setDecyzja(decyzja);
-            zamien(graUser);
+            manager.merge(graUser);
         }
     }
 
