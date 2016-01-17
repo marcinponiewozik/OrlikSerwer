@@ -65,10 +65,11 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
     }
 
     @PUT
-    @Path("/zapiszdecyzje/{decyzja}")
+    @Path("/uzytkownik/{id}/zapiszdecyzje/{decyzja}")
     @Consumes({"application/json"})
-    public Response zapiszUzytkownika(@PathParam("decyzja") Integer decyzja, Uzytkownik user) {
+    public Response zapiszUzytkownika(@PathParam("decyzja") Integer decyzja,@PathParam("id") Long id, Uzytkownik user) {
         Gra gra = new Gra();
+        user.setId(id);
         gra = graBean.wezGraByData(new Date());
         graUserBean.zmienDecyzja(gra, user, decyzja);
         return Response.status(Response.Status.OK).build();
