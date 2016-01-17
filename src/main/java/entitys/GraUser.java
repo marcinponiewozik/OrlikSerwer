@@ -27,10 +27,10 @@ public class GraUser implements Serializable {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID",referencedColumnName = "id")
     private Uzytkownik uzytkownik;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "GRA_ID")
+    @JoinColumn(name = "GRA_ID",referencedColumnName = "id")
     private Gra gra;
     private int decyzja;
 
