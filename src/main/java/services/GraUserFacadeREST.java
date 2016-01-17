@@ -7,6 +7,7 @@ package services;
 
 import beansDB.GraBean;
 import beansDB.GraUserBean;
+import beansDB.UzytkownikBean;
 import entitys.Gra;
 import entitys.GraUser;
 import entitys.Uzytkownik;
@@ -40,6 +41,8 @@ public class GraUserFacadeREST extends AbstractFacade<GraUser> {
     @EJB
     private GraBean graBean;
     @EJB
+    private UzytkownikBean uzytkownikBean;
+    @EJB
     private GraUserBean graUserBean;
 
     public GraUserFacadeREST() {
@@ -54,18 +57,16 @@ public class GraUserFacadeREST extends AbstractFacade<GraUser> {
     }
 
     @POST
-    @Path("/zapisz/{id}/decyzja/{decyzja}")
+    @Path("/zapiszgra/{id}")
     @Consumes({"application/json"})
-    public Response zapiszDecyzje(@PathParam("decyzja") Integer decyzja, @PathParam("id") Long id, Uzytkownik user) {
+    public Response zapiszDecyzje(@PathParam("id") Long id, GraUser graUser) {
         Gra gra = new Gra();
-        user.setId(id);
         gra = graBean.wezGraByData(new Date());
-        GraUser graUser = new GraUser();
-        graUser.setDecyzja(decyzja);
+        Uzytkownik user = new Uzytkownik();
+        user = uzytkownikBean.getUserById(id);
         graUser.setGra(gra);
         graUser.setUzytkownik(user);
-        super.create(graUser);
-//        graUserBean.zapiszDecyzje(gra, user, decyzja);
+        graUserBean.dodaj(graUser);
         return Response.status(Response.Status.CREATED).build();
     }
 
