@@ -39,9 +39,12 @@ public class GraUserBean {
 
     public void zapiszDecyzje(Gra gra, Uzytkownik uzytkownik, int decyzja) {
         GraUser graUser = new GraUser();
+        Uzytkownik u = manager.find(Uzytkownik.class, uzytkownik.getId());
+        Gra g = manager.find(Gra.class, gra.getId());
+        
         graUser.setDecyzja(decyzja);
-        graUser.setGra(gra);
-        graUser.setUzytkownik(uzytkownik);
+        graUser.setGra(g);
+        graUser.setUzytkownik(u);
       
         manager.persist(graUser);
     }
