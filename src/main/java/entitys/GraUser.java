@@ -26,10 +26,10 @@ public class GraUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,targetEntity = Uzytkownik.class)
     @JoinColumn(name = "USER_ID",referencedColumnName = "id")
     private Uzytkownik uzytkownik;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL,targetEntity = Gra.class)
     @JoinColumn(name = "GRA_ID",referencedColumnName = "id")
     private Gra gra;
     private int decyzja;
