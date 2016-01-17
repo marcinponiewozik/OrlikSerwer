@@ -64,10 +64,21 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         super.edit(entity);
     }
 
+    @POST
+    @Path("/zapisz/{id}/decyzja/{decyzja}")
+    @Consumes({"application/json"})
+    public Response zapiszDecyzje(@PathParam("decyzja") Integer decyzja, @PathParam("id") Long id, Uzytkownik user) {
+        Gra gra = new Gra();
+        user.setId(id);
+        gra = graBean.wezGraByData(new Date());
+        graUserBean.zapiszDecyzje(gra, user, decyzja);
+        return Response.status(Response.Status.CREATED).build();
+    }
+
     @PUT
     @Path("/uzytkownik/{id}/zapiszdecyzje/{decyzja}")
     @Consumes({"application/json"})
-    public Response zapiszUzytkownika(@PathParam("decyzja") Integer decyzja,@PathParam("id") Long id, Uzytkownik user) {
+    public Response zmienDecyzje(@PathParam("decyzja") Integer decyzja, @PathParam("id") Long id, Uzytkownik user) {
         Gra gra = new Gra();
         user.setId(id);
         gra = graBean.wezGraByData(new Date());
@@ -122,7 +133,6 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
 //    public List<Gra> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 //        return super.findRange(new int[]{from, to});
 //    }
-
     @GET
     @Path("/listachetnych")
     @Produces({"application/json"})

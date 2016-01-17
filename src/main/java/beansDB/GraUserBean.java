@@ -37,21 +37,23 @@ public class GraUserBean {
         manager.merge(graUser);
     }
 
+    public void zapiszDecyzje(Gra gra, Uzytkownik uzytkownik, int decyzja) {
+        GraUser graUser = new GraUser();
+        graUser.setDecyzja(decyzja);
+        graUser.setGra(gra);
+        graUser.setUzytkownik(uzytkownik);
+        manager.persist(graUser);
+    }
+
     public void zmienDecyzja(Gra gra, Uzytkownik uzytkownik, int decyzja) {
         Query q = manager.createQuery("SELECT g FROM GraUser g  WHERE g.uzytkownik.id=:idUser AND g.gra.id=:idGra", GraUser.class);
         q.setParameter("idUser", uzytkownik.getId());
         q.setParameter("idGra", gra.getId());
         GraUser graUser = new GraUser();
-        if (q.getResultList().isEmpty()) {
-            graUser.setDecyzja(decyzja);
-            graUser.setGra(gra);
-            graUser.setUzytkownik(uzytkownik);
-            manager.persist(graUser);
-        } else {
-            graUser = (GraUser) q.getResultList().get(0);
-            graUser.setDecyzja(decyzja);
-            manager.merge(graUser);
-        }
+        graUser = (GraUser) q.getResultList().get(0);
+        graUser.setDecyzja(decyzja);
+        manager.merge(graUser);
+
     }
 
     public List<Uzytkownik> wszystkieDecyzje(Gra g, int decyzja) {
