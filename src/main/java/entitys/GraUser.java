@@ -26,7 +26,11 @@ public class GraUser implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID")
     private Uzytkownik uzytkownik;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "GRA_ID")
     private Gra gra;
     private int decyzja;
 
@@ -38,8 +42,6 @@ public class GraUser implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
     public Uzytkownik getUzytkownik() {
         return uzytkownik;
     }
@@ -48,8 +50,6 @@ public class GraUser implements Serializable {
         this.uzytkownik = uzytkownik;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "GRA_ID")
     public Gra getGra() {
         return gra;
     }
