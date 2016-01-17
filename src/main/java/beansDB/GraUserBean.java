@@ -42,7 +42,7 @@ public class GraUserBean {
         graUser.setDecyzja(decyzja);
         graUser.setGra(gra);
         graUser.setUzytkownik(uzytkownik);
-        
+      
         manager.persist(graUser);
     }
 
