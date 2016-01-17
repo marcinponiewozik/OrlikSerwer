@@ -42,7 +42,8 @@ public class GraUserBean {
         graUser.setDecyzja(decyzja);
         graUser.setGra(gra);
         graUser.setUzytkownik(uzytkownik);
-        manager.persist(graUser);
+        
+//        manager.persist(graUser);
     }
 
     public void zmienDecyzja(Gra gra, Uzytkownik uzytkownik, int decyzja) {
