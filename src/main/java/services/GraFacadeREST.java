@@ -36,14 +36,8 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
 
     @PersistenceContext(unitName = "WebApplication1PU")
     private EntityManager em;
-
-    @EJB
-    private UzytkownikBean uzytkownikBean;
-
     @EJB
     private GraBean graBean;
-    @EJB
-    private GraUserBean graUserBean;
 
     public GraFacadeREST() {
         super(Gra.class);
@@ -64,40 +58,13 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         super.edit(entity);
     }
 
-//    @POST
-//    @Path("/zapisz/{id}/decyzja/{decyzja}")
-//    @Consumes({"application/json"})
-//    public Response zapiszDecyzje(@PathParam("decyzja") Integer decyzja, @PathParam("id") Long id, Uzytkownik user) {
-//        Gra gra = new Gra();
-//        user.setId(id);
-//        gra = graBean.wezGraByData(new Date());
-//        graUserBean.zapiszDecyzje(gra, user, decyzja);
-//        return Response.status(Response.Status.CREATED).build();
-//    }
-
-    @PUT
-    @Path("/uzytkownik/{id}/zapiszdecyzje/{decyzja}")
-    @Consumes({"application/json"})
-    public Response zmienDecyzje(@PathParam("decyzja") Integer decyzja, @PathParam("id") Long id, Uzytkownik user) {
-        Gra gra = new Gra();
-        user.setId(id);
-        gra = graBean.wezGraByData(new Date());
-        graUserBean.zmienDecyzja(gra, user, decyzja);
-        return Response.status(Response.Status.OK).build();
-    }
-
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Long id) {
         super.remove(super.find(id));
     }
 
-    @DELETE
-    @Path("wypiszuzytkownika/{id}")
-    public Response wypiszUzytkownika(@PathParam("id") Long id) {
-        graUserBean.wypiszUzytkownika(graBean.wezGraByData(new Date()), id);
-        return Response.status(Response.Status.OK).build();
-    }
+
 
     @GET
     @Path("{id}")
@@ -127,40 +94,7 @@ public class GraFacadeREST extends AbstractFacade<Gra> {
         return super.findAll();
     }
 
-//    @GET
-//    @Path("{from}/{to}")
-//    @Produces({"application/json"})
-//    public List<Gra> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-//        return super.findRange(new int[]{from, to});
-//    }
-    @GET
-    @Path("/listachetnych")
-    @Produces({"application/json"})
-    public List<Uzytkownik> listaChetnych() {
-        Gra gra = new Gra();
-        gra = graBean.wezGraByData(new Date());
-        return graUserBean.wszystkieDecyzje(gra, 0);
-    }
 
-    @GET
-    @Path("/listaniezdecydowanych")
-    @Produces({"application/json"})
-    public List<Uzytkownik> listaNiezdecydowanych() {
-        Gra gra = new Gra();
-        gra = graBean.wezGraByData(new Date());
-
-        return graUserBean.wszystkieDecyzje(gra, 1);
-    }
-
-    @GET
-    @Path("/listanieobecni")
-    @Produces({"application/json"})
-    public List<Uzytkownik> listaNieobecni() {
-        Gra gra = new Gra();
-        gra = graBean.wezGraByData(new Date());
-
-        return graUserBean.wszystkieDecyzje(gra, 2);
-    }
 
     @GET
     @Path("count")
